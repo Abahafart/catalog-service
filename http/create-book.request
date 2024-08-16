@@ -1,2 +1,11 @@
 http POST :9001/books author="Lyra Silverstar" title="Northern Lights" isbn="1234567891" price=9.90
 http :9001/books/1234567891
+http GET :9001
+java -jar build/libs/catalog-service-0.0.1-SNAPSHOT.jar --book.greeting="Welcome to the catalog from CLI"
+java -Dbook.greeting="Welcome to the catalog from JVM" -jar build/libs/catalog-service-0.0.1-SNAPSHOT.jar
+BOOK_GREETING="Welcome to the catalog from ENV" java -jar build/libs/catalog-service-0.0.1-SNAPSHOT.jar
+You can turn a Spring property key into an environment variable by making all
+the letters uppercase and replacing any dot or dash with an underscore. Spring Boot
+will map it correctly to the internal syntax. For example, a POLAR_GREETING environ-
+ment variable is recognized as the polar.greeting property. This feature is called
+relaxed binding.
