@@ -8,18 +8,19 @@ import java.math.BigDecimal;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-@DataJpaTest
-@Testcontainers
+@DataJdbcTest
 @Import(DataConfig.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles("integration")
-class BookRepositoryJdbcTest extends BaseIT {
+class BookRepositoryJdbcTest {
 
   @Autowired
   private BookRepository bookRepository;
@@ -27,7 +28,7 @@ class BookRepositoryJdbcTest extends BaseIT {
   @Test
   void findBookByIsbnWhenExisting() {
     String isbn = "1234567890";
-    Book book = Book.of(isbn, "title", "author", BigDecimal.valueOf(23));
+    Book book = Book.of(isbn, "title", "author", BigDecimal.valueOf(23), "VIVA-BOOKS");
     bookRepository.save(book);
     Optional<Book> byIsbn = bookRepository.findByIsbn(isbn);
     assertThat(byIsbn).isPresent();
