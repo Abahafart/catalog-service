@@ -22,7 +22,7 @@ class BookJsonTest {
 
   @Test
   void testSerialize() throws IOException {
-    Book book = new Book("1234567890", "Title", "Author", new BigDecimal(19));
+    Book book = Book.of("1234567890", "Title", "Author", new BigDecimal(19));
     JsonContent<Book> jsonContent = json.write(book);
     assertThat(jsonContent).extractingJsonPathStringValue("@.isbn").isEqualTo(book.isbn());
     assertThat(jsonContent).extractingJsonPathStringValue("@.title").isEqualTo(book.title());
@@ -35,14 +35,16 @@ class BookJsonTest {
     String content =
         """
         {
+        "id": "5",
           "isbn": "1234567890",
           "title": "Title",
           "author": "Author",
-          "price": 12
+          "price": 12,
+          "version": 0
         }
     """;
     assertThat(json.parse(content))
         .usingRecursiveComparison()
-        .isEqualTo(new Book("1234567890", "Title", "Author", new BigDecimal(12)));
+        .isEqualTo(new Book(5L,"1234567890", "Title", "Author", new BigDecimal(12), null, null, 0));
   }
 }

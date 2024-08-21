@@ -1,6 +1,5 @@
 package com.arch.catalogservice.domain;
 
-import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -12,7 +11,7 @@ public class BookService {
     this.bookRepository = bookRepository;
   }
 
-  public List<Book> viewBookList() {
+  public Iterable<Book> viewBookList() {
     return bookRepository.findAll();
   }
 
@@ -38,10 +37,14 @@ public class BookService {
             existingBook -> {
               Book toUpdate =
                   new Book(
+                      existingBook.id(),
                       existingBook.isbn(),
                       existingBook.title(),
                       existingBook.author(),
-                      existingBook.price());
+                      existingBook.price(),
+                      existingBook.createdDate(),
+                      existingBook.lastModifiedDate(),
+                      existingBook.version());
               return bookRepository.save(toUpdate);
             })
         .orElseGet(() -> bookRepository.save(book));
