@@ -6,6 +6,8 @@ import com.arch.catalogservice.BaseIT;
 import com.arch.catalogservice.config.DataConfig;
 import java.math.BigDecimal;
 import java.util.Optional;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
@@ -24,6 +26,11 @@ class BookRepositoryJdbcTest {
 
   @Autowired
   private BookRepository bookRepository;
+
+  @BeforeEach
+  void setUp() {
+    bookRepository.deleteAll();
+  }
 
   @Test
   void findBookByIsbnWhenExisting() {

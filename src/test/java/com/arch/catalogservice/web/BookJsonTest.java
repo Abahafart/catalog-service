@@ -41,7 +41,7 @@ class BookJsonTest {
           "title": "Title",
           "author": "Author",
           "price": 12,
-          "publisher": "VIVA-BOOKS"
+          "publisher": "VIVA-BOOKS",
           "version": 0
         }
     """;
