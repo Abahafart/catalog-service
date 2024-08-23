@@ -63,3 +63,15 @@ tasks.withType<Test> {
 tasks.bootRun {
     systemProperty("spring.profiles.active", "testdata")
 }
+
+tasks.bootBuildImage {
+    imageName = "${project.name}"
+    environment = mapOf("BP_JVM_VERSION" to "21.*")
+    docker {
+        publishRegistry {
+            username = System.getenv("GITHUB_USER")
+            password = System.getenv("GITHUB_PASSWORD")
+            url = "https://${System.getenv("GITHUB_URL")}"
+        }
+    }
+}
