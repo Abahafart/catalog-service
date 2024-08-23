@@ -79,6 +79,10 @@ To run your existing tests in a native image, run the following goal:
 $ ./gradlew nativeTest
 ```
 
+### Push image to github registry
+This url ghcr.io
+Set GITHUB_USER, GITHUB_PASSWORD and GITHUB_URL as environment variables
+
 ### Gradle Toolchain support
 
 There are some limitations regarding Native Build Tools and Gradle toolchains.
