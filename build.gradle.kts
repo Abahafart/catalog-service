@@ -69,9 +69,9 @@ tasks.bootBuildImage {
     environment = mapOf("BP_JVM_VERSION" to "21.*")
     docker {
         publishRegistry {
-            username = System.getenv("GITHUB_USER")
-            password = System.getenv("GITHUB_PASSWORD")
-            url = "https://${System.getenv("GITHUB_URL")}"
+            username = System.getenv("USER_GITHUB")
+            password = System.getenv("TOKEN_GITHUB")
+            url = "https://${System.getenv("URL_GITHUB")}"
         }
     }
 }
