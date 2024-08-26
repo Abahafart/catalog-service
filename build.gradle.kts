@@ -65,13 +65,14 @@ tasks.bootRun {
 }
 
 tasks.bootBuildImage {
+    builder.set("docker.io/paketobuildpacks/builder-jammy-base")
     imageName = "${project.name}"
-    environment = mapOf("BP_JVM_VERSION" to "21.*")
+    environment = mapOf("BP_JVM_VERSION" to "21")
     docker {
         publishRegistry {
-            username = System.getenv("USER_GITHUB")
-            password = System.getenv("TOKEN_GITHUB")
-            url = "https://${System.getenv("URL_GITHUB")}"
+            username = project.findProperty("registryUsername").toString()
+            password = project.findProperty("registryToken").toString()
+            url = project.findProperty("registryUrl").toString()
         }
     }
 }
